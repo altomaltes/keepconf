@@ -1,0 +1,11 @@
+
+export        CC=${MACHTYPE}-gcc
+export        AR=${MACHTYPE}-ar
+export       CCC=${MACHTYPE}-g++
+export      DEST=${HOSTTYPE}
+export     PACK="makepkg -l y -c n "
+export   INSTALL=$(which ginstall)
+export SVN_BUILD=$( svnversion | cut -f1 -d: )
+
+exec make $@
+
