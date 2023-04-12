@@ -1,6 +1,0 @@
-cflags = -Wall
-
-rule ccc
-  command = g++ $cflags -c $in -o $out
-
-build keepconf.o: ccc keepconf.cc

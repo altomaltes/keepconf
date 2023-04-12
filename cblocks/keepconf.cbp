@@ -140,8 +140,8 @@
 					<Add option="-g" />
 				</Compiler>
 				<ExtraCommands>
-					<Add before='install -c  $(PROJECT_DIR)../keepconf.h &quot;$(TARGET_COMPILER_DIR)include&quot;' />
-					<Add before='install -c  $(PROJECT_DIR)../parse.h &quot;$(TARGET_COMPILER_DIR)include&quot;' />
+					<Add before="$(CMD_CP)  $TO_NATIVE_PATH{ $(PROJECT_DIR)../keepconf.h } $TO_NATIVE_PATH{ $(TARGET_COMPILER_DIR)include }" />
+					<Add before="$(CMD_CP)  $TO_NATIVE_PATH{ $(PROJECT_DIR)../parse.h } $TO_NATIVE_PATH{ $(TARGET_COMPILER_DIR)include }" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>

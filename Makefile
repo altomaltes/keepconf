@@ -10,7 +10,7 @@ INSTALL ?= install
 
 BUILDDIR= $(shell uname -m ) 
 PACKAGE= keepconf
-SOURCES= keepconf.o intern.o xml.o json.o
+SOURCES= keepconf.o intern.o xml.o json.o support.o
 OBJECTS= $(SOURCES:%.c=$(BUILDDIR)/%.o)
 DEPENDS= $(OBJECTS:%.o=%.d) 
 

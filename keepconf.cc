@@ -150,7 +150,7 @@ ANSIC const char * pushElement( ObjConfRec & cnf
     if ( !strcmp( type, "class" ))
     { args->index= phase;
       if ( args > cnf.levels )
-      { code->loader( cnf, code->holder );
+      { if ( code->loader ) code->loader( cnf, code->holder );
       }
 
    //   printf( ">>>: %2d: %s >>> %d    [ %10s-%10s ]\n"
@@ -167,7 +167,8 @@ ANSIC const char * pushElement( ObjConfRec & cnf
     }
 
     if ( phase < 0 )   // 2020, total array size
-    { args->index= 0;
+    { 
+      args->index= 0;
       args->size= -phase;
     }
     else
@@ -178,7 +179,7 @@ ANSIC const char * pushElement( ObjConfRec & cnf
 
     args->objs=   NULL;    // Mark arguments as invalid
     args->names=  NULL;
-    args->loader= NULL;
+    args->loader= NULL; 
     args->holder= NULL;
   }                        // Leave object
   else
@@ -186,8 +187,9 @@ ANSIC const char * pushElement( ObjConfRec & cnf
     cnf.value= NULL;
 
     if ( cnf.info > cnf.levels )
-    { code->loader( cnf, code->holder );
-    }
+    { 
+       if ( code->loader )  code->loader( cnf, code->holder );
+    } 
 
     return( cnf.info->names );    // Name of the object needed
   }
@@ -222,7 +224,10 @@ const char * asString( char * buff, const unsigned long  w ) { return( ulltoa( w
 const char * asString( char * buff, const float          w ) { return( gcvt( w, 10, buff )); }
 const char * asString( char * buff, const double         w ) { return( gcvt( w, 10, buff )); }
 
-const char * asString( char * buff, const char         * w ) { return( strcpy( buff, w ? w : " " )); }
+const char * asString( char * buff, const char         * w ) 
+{ return( strcpy( buff, w ? w : " " )); 
+}
+
 const char * asString( char * buff,       char         * w ) { return( strcpy( buff, w ? w : " " )); }
 
 const char * asString( char * buff, const char         & w ) { return( "---------------- char " ); }

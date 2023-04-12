@@ -568,7 +568,7 @@ struct ObjConfRec
     switch( code )
     { case OBJECT_SAVE:
       { int x,y,z;
-        char   store[ 64 ];
+        char   store[ 8192 ];
         char * buff= (char*)alloca( buffsz ? ( buffsz + 1 ) : 64 * ( x0*y0*z0 )  );
         char * ptr= buff; *ptr= 0;
 
@@ -644,7 +644,7 @@ struct ObjConfRec
 
     switch( code )
     { case OBJECT_SAVE:
-      { char buff[ 64 ];
+      { char buff[ 8192 ];
         asString( buff, t ) ;
         enter( id, key, buff, INTEGER_NAN );       // LOAD version
       }

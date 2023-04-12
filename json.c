@@ -374,30 +374,40 @@ ANSIC KeepSvr jsnDone( KeeperRec * keep )
   return( jsnSave );
 }
 
+
+/* nov 2022, sanity check
+ */
+
 ANSIC KeepSvr jsnInit( KeeperRec  * keep
                      , void       * autom
                      , const char * name )
 { char buff[ 256 ]; int sz;
 
-  keep->phase= PHASE_IDLE;
-  keep->ptr  = NULL;
-  keep->data = autom;
+  if ( keep && autom && name )
+  { memset( keep, 0, sizeof( *keep ));
 
-  pushElement( keep->data
-             , INTEGER_NAN
-             , "config"
-             , "style"
-             , "json" );  /* Tell enter object  */
-  sz= sprintf( buff, "{ \"%s\": \n", name );
-  jsonParse( keep, buff,  sz );
+    keep->phase= PHASE_IDLE;
+    keep->ptr  = NULL;
+    keep->data = autom;
 
-  return( jsnSave );
+    pushElement( keep->data
+               , INTEGER_NAN
+               , "config"
+               , "style"
+               , "json" );  /* Tell enter object  */
+    sz= sprintf( buff, "{ \"%s\": \n", name );
+    jsonParse( keep, buff,  sz );
+
+    return( jsnSave );
+  }
+
+  return( NULL );
 }
 
 
 
 static void getName( char * buff, const char * name, const char * path )
-{ strcpy( buff, path );
+{ strcpy( buff, path ? path : "./" );
 
   char * mk= strrchr( buff, '/' );  // try UNIX
 
@@ -417,7 +427,7 @@ static void getName( char * buff, const char * name, const char * path )
 ANSIC ObjectKeeper jsnSave( KeeperRec  * jsn
                           , const char * name
                           , const char * path
-                          , void       * data  )
+                          , void       * data )
 { char * fname= alloca( strlen( name ) + 1024 );
 
   jsn->ptr= NULL;
@@ -434,13 +444,10 @@ ANSIC ObjectKeeper jsnSave( KeeperRec  * jsn
 /** calls pushElement on token discover
  */
 ANSIC KeepSvr jsnLoad( const char * name
-                     ,                  const char * path
+                     , const char * path
                      , void       * autom )
 { char * fname= alloca( strlen( name ) + 1024 );
   FILE * file;
-
-  strcpy( fname, name );
-  strcat( fname, ".jsn"   );
 
   getName( fname, name, path ); if (( file= fopen( fname, "rt" ) ))
   { int sz;
