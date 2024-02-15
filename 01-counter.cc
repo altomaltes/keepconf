@@ -37,6 +37,7 @@ int main( int argc, char ** argv )
 
   counter++;         // Increase executions
 
+
   return( counter );
 }
 
