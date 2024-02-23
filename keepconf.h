@@ -28,8 +28,10 @@
 #ifndef KEEPCONF_H_INCLUDED
 #define KEEPCONF_H_INCLUDED
 
-#ifndef _WIN32 
+#ifndef _WIN32
   #include <alloca.h>
+#else
+  #define alloca(sz) __builtin_alloca( sz )
 #endif
 
 #include "parse.h"

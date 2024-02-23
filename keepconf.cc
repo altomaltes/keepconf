@@ -43,15 +43,14 @@ extern "C" char *  lltoa( long long value, char * buff, int radix );
 
 char *itoa( int n, char * buf, int base )
 {
-
-  sprintf(buf, "%ld", n);
+  sprintf(buf, "%d", n);
   return   buf;
 }
 
 char *ltoa( int n, char * buf, int base )
 {
 
-  sprintf(buf, "%lu", n);
+  sprintf(buf, "%u", n);
   return   buf;
 }
 
@@ -167,7 +166,7 @@ ANSIC const char * pushElement( ObjConfRec & cnf
     }
 
     if ( phase < 0 )   // 2020, total array size
-    { 
+    {
       args->index= 0;
       args->size= -phase;
     }
@@ -179,7 +178,7 @@ ANSIC const char * pushElement( ObjConfRec & cnf
 
     args->objs=   NULL;    // Mark arguments as invalid
     args->names=  NULL;
-    args->loader= NULL; 
+    args->loader= NULL;
     args->holder= NULL;
   }                        // Leave object
   else
@@ -187,9 +186,9 @@ ANSIC const char * pushElement( ObjConfRec & cnf
     cnf.value= NULL;
 
     if ( cnf.info > cnf.levels )
-    { 
+    {
        if ( code->loader )  code->loader( cnf, code->holder );
-    } 
+    }
 
     return( cnf.info->names );    // Name of the object needed
   }
@@ -224,8 +223,8 @@ const char * asString( char * buff, const unsigned long  w ) { return( ulltoa( w
 const char * asString( char * buff, const float          w ) { return( gcvt( w, 10, buff )); }
 const char * asString( char * buff, const double         w ) { return( gcvt( w, 10, buff )); }
 
-const char * asString( char * buff, const char         * w ) 
-{ return( strcpy( buff, w ? w : " " )); 
+const char * asString( char * buff, const char         * w )
+{ return( strcpy( buff, w ? w : " " ));
 }
 
 const char * asString( char * buff,       char         * w ) { return( strcpy( buff, w ? w : " " )); }
