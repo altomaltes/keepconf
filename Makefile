@@ -1,10 +1,10 @@
 
 VERSION=1.0.0
 
-CC  ?= gcc
-CCC ?= g++
-DST ?= $(shell uname -m )
-PACK ?= makepkg -l y -c n 
+CC  = gcc
+CCC = g++
+DST = $(shell uname -m )
+PACK = makepkg -l y -c n 
 
 INSTALL ?= install
 
