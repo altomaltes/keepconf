@@ -199,6 +199,10 @@
 			<Option target="virtual" />
 			<Option target="07-array" />
 		</Unit>
+		<Unit filename="../unalloc/unalloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../unalloc/unalloc.h" />
 		<Unit filename="../xml.c">
 			<Option compilerVar="CC" />
 		</Unit>
