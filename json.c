@@ -479,9 +479,6 @@ ANSIC size_t jsonDigest( char    *ptr, size_t size
                        , size_t nmemb, void *userdata )
 { size *= nmemb;
 
-//  puts(ptr);
-
-
   jsonParse( (KeeperRec*)userdata, ptr, size );
   return( size );
 }

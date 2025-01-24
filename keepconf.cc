@@ -294,11 +294,14 @@ const char * fromString(  unsigned  qlong     & w, const char * buff )
 }
 
 const char * fromString(           double   & w, const char * buff )
-{ w= atof( buff ); return( buff );
+{ char * mk= strchr( (char*)buff, ',' ); if ( mk ) { *mk= '.'; }  /** some spaniard had a bad idea */
+  w= atof( buff ); return( buff );
 }
 
 const char * fromString(         float     & w, const char * buff )
-{ w= atof( buff ); return( buff );
+{ char * mk= strchr( (char*)buff, ',' ); if ( mk ) { *mk= '.'; }  /** some spaniard had a bad idea */
+
+  w= atof( buff ); return( buff );
 }
 
 const char * fromString(  unsigned char *   & w, const char * buff ) { return( strcpy( (char*)w, buff )); }
